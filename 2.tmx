@@ -108,12 +108,12 @@
  </layer>
  <layer name="edible floor" width="40" height="36">
   <data encoding="base64" compression="zlib">
-   eJztzqENACAMALAdty/BwaHsARxiIRX1zYhIAAAAAOBro8wGj5tVdoMHbx09Wn/+
+   eJztw0ENAAAMA6ETV/+aZmJPSFg1VVVVVVV9fi/dfpA=
   </data>
  </layer>
  <layer name="foreground" width="40" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt2LEKwCAMANH8rR3b/19qBxdBSjloItxByCoPB7FFxNGnFd1nn6vwHues1uxXLf1Y+rH0Y+nH0o+lH2v2+3u/lf3+++pXrd3uX7X0Y+nH0o+lH0s/ln6snfyy/0hXe/hl/5Gu9jM3maCRIQ==
+   eJztmL0KgDAMhPOOuutWR33/xYI4eEJ/0kQz3EG4oXzFfnQoJhHZ8qSgvec5Avf9ndbR7jvlmeXtzzrafZc8q8T1h3w0f8jXzqn18JU/rQf6u0J/ZZ7+dKG/Jzf6fqmdozfIeb1feP/KPP3pQn/0Jw3r1hzy3v56G3lvf72NPO+fLvRHf9Kwbs0h7+VvNN7+RoP+ovbf/0drfQKiJ8AX
   </data>
  </layer>
  <layer name="sprites" width="40" height="36" visible="0">
@@ -121,9 +121,9 @@
    eJztwTEBAAAAwqD1T20JT6AAAAAAAOBvFoAAAQ==
   </data>
  </layer>
- <layer name="triggers" width="40" height="36" visible="0">
+ <layer name="triggers" width="40" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt2EsKgDAMhOHc/yY+agU9oNm4SKAozmIizAeh2/DTRWkzs82nFT8Pn7PwWU3uV436YdQPM+o3+cyUjaJRv+6zUzaKdP8w6odRP8zdjfWee8J+973tp/v3jfph1A+jfhj1w6gfRv0wud/is1I3inK/avvlfuz/0b/+m15iHfKN
+   eJztmP0KwyAMxPP+b9Kt3daPB1zKCGxpiTUzbf64g0NBT/SHiGQgogd7SNrO7CVxK/tsLe+6d3ZPW36t5V13ZE+Ul5/OZ+On86Vzejmcxc/LAfw+Aj87D34+gd9v7t//S+kctdK5qP8L7p+dBz+fwA/86MB465zOR/OrbXU+ml9tq/O4fz6BH/jRgfHWOZ2XfXbs2868qPpMSZrfk/3amRdVnynpm5/1pkv/itqp8LPedOlfUTtd/QYOqD0e
   </data>
  </layer>
 </map>
