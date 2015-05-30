@@ -1,6 +1,8 @@
 __author__ = 'Kedam'
 
 
+
+
 class LevelCounter():
 
     def __init__(self):
@@ -13,4 +15,4 @@ class LevelCounter():
 
     def getcurrentlevel(self):
         print self.count
-        return str(self.count)
+        return 'maps\\' + str(self.count)
