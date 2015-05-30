@@ -88,6 +88,17 @@ class Player(pygame.sprite.Sprite):
             game.initArea(game.counter.getcurrentlevel() + '.tmx')
 
             return
+
+        elif len(game.tilemap.layers['edible floor'].collide(self.rect,
+                                                        'noteaten')) > 0:
+            for o in game.tilemap.layers['edible floor'].get_in_region(self.rect.left, self.rect.top, self.rect.right - 1,
+                self.rect.bottom - 1):
+                o.px = 0
+                o.py = 0
+                o.x = 0
+                o.y = 0
+            game.tilemap.draw(game.screen)
+
         # Switch to the walking sprite after 32 pixels
         if self.dx == 32:
             # Self.step keeps track of when to flip the sprite so that
@@ -104,5 +115,6 @@ class Player(pygame.sprite.Sprite):
             self.walking = False
             self.setSprite()
             self.dx = 0
+
 
         game.tilemap.set_focus(self.rect.x, self.rect.y)

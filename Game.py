@@ -5,10 +5,6 @@ from src.SpriteLoop import SpriteLoop
 from src.LevelCounter import LevelCounter
 
 
-
-
-
-        
 class Game(object):
     def __init__(self, screen, counter):
         self.screen = screen
@@ -49,7 +45,8 @@ class Game(object):
         self.player = Player((startCell.px, startCell.py), 
                              startCell['playerStart'], self.players)
         self.tilemap.layers.append(self.players)
-        self.tilemap.set_focus(self.player.rect.x, self.player.rect.y)  
+        self.tilemap.set_focus(self.player.rect.x, self.player.rect.y)
+
             
     def main(self):
         clock = pygame.time.Clock()
@@ -75,5 +72,6 @@ class Game(object):
 if __name__ == '__main__':
     pygame.init()
     screen = pygame.display.set_mode((1024, 768))
-    pygame.display.set_caption("OM NOM NOM NOM NOM")
+    pygame.display.set_caption("PyDash")
+    pygame.display.set_icon(pygame.image.load('sprites/icon.png'))
     Game(screen, LevelCounter()).main()
