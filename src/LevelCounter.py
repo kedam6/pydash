@@ -1,18 +1,24 @@
+"""
+Level counter class, it simply counts what level we are at.
+Increases that counter if needed. Currently it's range [1;4]
+"""
+
 __author__ = 'Kedam'
 
 
-
-
-class LevelCounter():
+class LevelCounter(object):
+    """LevelCounter class"""
 
     def __init__(self):
         self.count = 1
 
-    def nextlevel(self):
+    def next_level(self):
+        """Increases level counter"""
         self.count = ((self.count + 1) % 5)
         if self.count == 0:
             self.count = 1
 
-    def getcurrentlevel(self):
+    def get_current_level(self):
+        """Gets current level counter with maps prefix to make it look better"""
         print self.count
         return 'maps\\' + str(self.count)
