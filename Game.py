@@ -83,7 +83,7 @@ class Game(object):
             # Await event from user to close level
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    return
+                    sys.exit(0)
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     return
 
@@ -105,6 +105,6 @@ if __name__ == '__main__':
     MENU_ITEMS = ('Start', 'Options', 'Quit')
     FUNCTIONS = {'Start': Game(SCREEN, LevelCounter()).main, 'Options': sys.exit, 'Quit': sys.exit}
 
-    # Run game
+    # Run game, will do some backgrounds later
     GAME = GameMenu(SCREEN, FUNCTIONS.keys(), FUNCTIONS)
     GAME.run()

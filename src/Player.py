@@ -118,7 +118,6 @@ class Player(pygame.sprite.Sprite):
             self.walking = True
         last_rect = self.rect.copy()
 
-
         # Movement speed is n px/frame
         mov_speed = 16
 
