@@ -21,4 +21,4 @@ class LevelCounter(object):
     def get_current_level(self):
         """Gets current level counter with maps prefix to make it look better"""
         print self.count
-        return 'maps\\' + str(self.count)
+        return 'maps/' + str(self.count)
