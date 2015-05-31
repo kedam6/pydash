@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="ground" tilewidth="32" tileheight="32">
   <image source="tiles/groundCompiled.png" width="192" height="32"/>
  </tileset>
- <tileset firstgid="7" name="lab" tilewidth="32" tileheight="32">
+ <tileset firstgid="7" name="omnomnom" tilewidth="32" tileheight="32">
   <image source="tiles/lab.png" width="384" height="256"/>
   <tile id="0">
    <properties>
@@ -39,10 +39,7 @@
  <tileset firstgid="103" name="objects" tilewidth="32" tileheight="32">
   <image source="tiles/objects.png" width="288" height="64"/>
  </tileset>
- <tileset firstgid="121" name="house" tilewidth="32" tileheight="32">
-  <image source="tiles/house.png" width="256" height="192"/>
- </tileset>
- <tileset firstgid="169" name="triggers" tilewidth="32" tileheight="32">
+ <tileset firstgid="121" name="triggers" tilewidth="32" tileheight="32">
   <image source="tiles/triggers.png" width="192" height="64"/>
   <tile id="0">
    <properties>
@@ -80,7 +77,7 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="181" name="sprites" tilewidth="32" tileheight="32">
+ <tileset firstgid="133" name="sprites" tilewidth="32" tileheight="32">
   <image source="tiles/sprites.png" width="128" height="64"/>
   <tile id="0">
    <properties>
@@ -113,7 +110,7 @@
  </layer>
  <layer name="foreground" width="60" height="36">
   <data encoding="base64" compression="zlib">
-   eJztmbEOgCAMRPlH3XXDUf9/kaVLFyge2sq9pLmlXELeBjmldJTJk+RZ5poo5d6t6H3r+RpLmRXYq/vk3q3ofev5GluZHdir+7z5HdXr1e+oXvptYza/mr/71UT1a00hql9rClH99hLVby/0i4F+MX30a4N+MdAvpo9+bdAvBvrF9NGvDfrFQL+YPq9+0Xj3i4Z++5jNbxRQfqPw9P05an793/523iKi3H0=
+   eJztmTsOwCAMQ7ktbad+7i81C0sWCDVtUvykyEuwhN4GOaW0yORJcpc5Jspy71b0vvV8jVVmA/bqvnLvVvS+9XyNU+YC9uo+b35H9Xr1O6qXftuYza/m7341Uf1asxDVrzULUf32EtVvL/SLgX4xffRrg34x0C+mj35t0C8G+sX00a8N+sVAv5g+r37RePeLhn77mM1vFFB+o/D0/Tlqfv3f/nbe0NfdIQ==
   </data>
  </layer>
  <layer name="sprites" width="60" height="36" visible="0">
@@ -123,7 +120,7 @@
  </layer>
  <layer name="triggers" width="60" height="36" visible="0">
   <data encoding="base64" compression="zlib">
-   eJztmUEOgzAMBPP/n7SUggQPrC978aV12NA42ZGsveAV1txgLaW8bdZJ8rA5J0rc/bB5lu9gD2CfxWLzatDr/W42e2AP+PuvgnvZvd5vdA+wPbTq9X5r34PtoVWv/P6Gf350v57R/Xqy+o0myOo3miCr31qy+q1FfjnIL6dPfmPILwf55fTJbwz55SC/nD75jSG/HOSX09erXza9+2Ujv3XM5jcLLL9ZuPr9OWv++3/73fkBz0NpPg==
+   eJztmbEOgzAMRPPbLaUgwYfXyy1eWocLjZN7knULPmG9DdZSyttmnSQPm3OixN0Pm2f5DvYA9lksNq8Gvd7vZrMH9oC//yq4l93r/Ub3ANtDq17vt/Y92B5a9crvb/jnR/frGd2vJ6vfaIKsfqMJsvqtJavfWuSXg/xy+uQ3hvxykF9On/zGkF8O8svpk98Y8stBfjl9vfpl07tfNvJbx2x+s8Dym4Wr35+z5r//t9+dH1uVBv4=
   </data>
  </layer>
 </map>
