@@ -28,13 +28,14 @@ class Player(pygame.sprite.Sprite):
         self.walking = False
         self.delta_x = 0
         self.step = 'rightFoot'
-        # Set default orientation
+
+        # Set default orientation as facing down
         self.set_sprite()
 
     def set_sprite(self):
         """Decides which sprite it has to use to move player"""
-        # Resets the player sprite sheet to its default position
-        # and scrolls it to the necessary position for the current orientation
+        # Reset player sprite to face down, then decide which one to use based on orientation
+        # It simply tracks pointer to appropriate sprite
         self.image = self.image_default.copy()
         if self.orient == 'up':
             self.image.scroll(0, -64)
@@ -48,7 +49,7 @@ class Player(pygame.sprite.Sprite):
     def check_movement(self, time_passed):
         """Checks keyboard for pressed movement keys"""
         key = pygame.key.get_pressed()
-        # Setting orientation and sprite based on key input:
+        # Set orientation and sprite based on key held at them moment
         if key[pygame.K_UP]:
             if not self.walking:
                 if self.orient != 'up':
@@ -73,25 +74,26 @@ class Player(pygame.sprite.Sprite):
                     self.orient = 'right'
                     self.set_sprite()
                 self.hold_time += time_passed
+        # Nothing happened
         else:
             self.hold_time = 0
             self.step = 'rightFoot'
 
     def detect_collision(self, last_rect, game):
         """Checks current position for any interactable objects"""
-        # Collision detection:
-        # Reset to the previous rectangle if player collides
-        # with anything in the foreground layer
+
+        # Check if we encountered a solid object, if yes, do not cross it
         if len(game.tilemap.layers['triggers'].collide(self.rect, 'solid')) > 0:
             self.rect = last_rect
-        # Area entry detection:
+
+        # We reached entry tile, create screen fadeout, then load next level
         elif len(game.tilemap.layers['triggers'].collide(self.rect, 'entry')) > 0:
             game.fadeout()
             game.counter.next_level()
             game.startlevel(game.counter.get_current_level() + '.tmx')
-
             return
 
+        # We are on edible floor, destroy every cell that we encounter from layer
         elif len(game.tilemap.layers['edible floor'].collide(self.rect, 'noteaten')) > 0:
             for item in game.tilemap.layers['edible floor']\
                     .get_in_region(self.rect.left,
@@ -102,6 +104,8 @@ class Player(pygame.sprite.Sprite):
                 item.py = 0
                 item.x = 0
                 item.y = 0
+
+            # Update map after
             game.tilemap.draw(game.screen)
 
     def update(self, time_passed, game):
@@ -109,30 +113,34 @@ class Player(pygame.sprite.Sprite):
 
         self.check_movement(time_passed)
 
-        # Walking mode enabled if a button is held for 0.1 seconds
+        # If we hold button for 100ms, we enable moving
         if self.hold_time >= 100:
             self.walking = True
         last_rect = self.rect.copy()
-        # Walking at 8 pixels per frame in the direction the player is facing
+
+
+        # Movement speed is n px/frame
+        mov_speed = 16
+
+        # Move rect with mov speed
         if self.walking and self.delta_x < 64:
             if self.orient == 'up':
-                self.rect.y -= 8
+                self.rect.y -= mov_speed
             elif self.orient == 'down':
-                self.rect.y += 8
+                self.rect.y += mov_speed
             elif self.orient == 'left':
-                self.rect.x -= 8
+                self.rect.x -= mov_speed
             elif self.orient == 'right':
-                self.rect.x += 8
-            self.delta_x += 8
+                self.rect.x += mov_speed
+            self.delta_x += mov_speed
 
+        # Detect collision after
         self.detect_collision(last_rect, game)
-
-
 
         # Switch to the walking sprite after 32 pixels
         if self.delta_x == 32:
             # Self.step keeps track of when to flip the sprite so that
-            # the character appears to be taking steps with different feet.
+            # The character appears to be taking steps with different feet.
             if (self.orient == 'up' or self.orient == 'down') and self.step == 'leftFoot':
                 self.image = pygame.transform.flip(self.image, True, False)
                 self.step = 'rightFoot'
@@ -145,4 +153,5 @@ class Player(pygame.sprite.Sprite):
             self.set_sprite()
             self.delta_x = 0
 
+        # Refocus the camera
         game.tilemap.set_focus(self.rect.x, self.rect.y)
