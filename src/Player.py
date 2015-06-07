@@ -15,6 +15,8 @@ __author__ = 'Kedam'
 import pygame
 
 
+MOV_SPEED = 16
+
 class Player(pygame.sprite.Sprite):
     """Player class"""
 
@@ -28,6 +30,8 @@ class Player(pygame.sprite.Sprite):
         self.walking = False
         self.delta_x = 0
         self.step = 'rightFoot'
+        self.score = 0
+        self.locked = False
 
         # Set default orientation as facing down
         self.set_sprite()
@@ -88,8 +92,9 @@ class Player(pygame.sprite.Sprite):
 
         # We reached entry tile, create screen fadeout, then load next level
         elif len(game.tilemap.layers['triggers'].collide(self.rect, 'entry')) > 0:
-            game.fadeout()
             game.counter.next_level()
+            game.music.stopbg()
+            game.fadeout()
             game.startlevel(game.counter.get_current_level() + '.tmx')
             return
 
@@ -100,16 +105,18 @@ class Player(pygame.sprite.Sprite):
                                    self.rect.top,
                                    self.rect.right - 1,
                                    self.rect.bottom - 1):
-                item.px = 0
-                item.py = 0
-                item.x = 0
-                item.y = 0
+                item.px = 1500
+                item.py = 1500
+                item.x = 255
+                item.y = 255
 
             # Update map after
             game.tilemap.draw(game.screen)
 
+
     def update(self, time_passed, game):
         """Update player state, check if player used keys"""
+
 
         self.check_movement(time_passed)
 
@@ -119,19 +126,18 @@ class Player(pygame.sprite.Sprite):
         last_rect = self.rect.copy()
 
         # Movement speed is n px/frame
-        mov_speed = 16
-
+        if not self.locked:
         # Move rect with mov speed
-        if self.walking and self.delta_x < 64:
-            if self.orient == 'up':
-                self.rect.y -= mov_speed
-            elif self.orient == 'down':
-                self.rect.y += mov_speed
-            elif self.orient == 'left':
-                self.rect.x -= mov_speed
-            elif self.orient == 'right':
-                self.rect.x += mov_speed
-            self.delta_x += mov_speed
+            if self.walking and self.delta_x < 64:
+                if self.orient == 'up':
+                    self.rect.y -= MOV_SPEED
+                elif self.orient == 'down':
+                    self.rect.y += MOV_SPEED
+                elif self.orient == 'left':
+                    self.rect.x -= MOV_SPEED
+                elif self.orient == 'right':
+                    self.rect.x += MOV_SPEED
+                self.delta_x += MOV_SPEED
 
         # Detect collision after
         self.detect_collision(last_rect, game)
@@ -154,3 +160,10 @@ class Player(pygame.sprite.Sprite):
 
         # Refocus the camera
         game.tilemap.set_focus(self.rect.x, self.rect.y)
+
+    def die(self, game):
+        self.image = pygame.image.load('sprites/explosion.png').convert()
+        for i in range(0, 16):
+            self.image.scroll(-64, 0)
+            game.screen.blit(self.image, self.rect)
+            pygame.time.wait(50)

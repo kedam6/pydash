@@ -7,10 +7,11 @@ import sys
 import pygame
 from src.lib import tmx
 from src.Player import Player
-from src.SpriteLoop import SpriteLoop
 from src.LevelCounter import LevelCounter
 from src.GameMenu import GameMenu
-
+from src.Collectible import Collectible
+from src.Stone import Stone
+from src.Sounds import SoundPlayer
 
 class Game(object):
     """Game class, it runs whole game"""
@@ -22,15 +23,63 @@ class Game(object):
         self.players = None
         self.objects = None
         self.player = None
+        self.collectibles = []
+        self.stones = []
+        self.music = SoundPlayer()
 
     def fadeout(self):
         """Animate the screen fading to black for entering a new area"""
 
         # Get screen options, fill with black
         clock = pygame.time.Clock()
+
+        self.music.startsound()
+
         blackrect = pygame.Surface(self.screen.get_size())
         blackrect.set_alpha(100)
         blackrect.fill((0, 0, 0))
+
+        # Start changing color to make an illusion of animation
+        for i in range(0, 20):
+            clock.tick(20)
+            self.screen.blit(blackrect, (0, 0))
+            pygame.display.flip()
+
+        myfont = pygame.font.SysFont("Arial", 50)
+        label = myfont.render("Level " + str(self.counter.count), 1, (255, 255, 0))
+        textpos = label.get_rect()
+        textpos.centerx = blackrect.get_rect().centerx
+        textpos.centery = blackrect.get_rect().centery
+        self.screen.blit(label, textpos)
+        pygame.display.flip()
+
+        pygame.time.wait(1000)
+
+
+        blackrect = pygame.Surface(self.screen.get_size())
+        blackrect.set_alpha(50)
+        blackrect.fill((0, 0, 0))
+
+        # Start changing color to make an illusion of animation
+        for i in range(1, 20):
+            clock.tick(20)
+            self.screen.blit(blackrect, (0, 0))
+            pygame.display.flip()
+
+        # Then release color
+        clock.tick(15)
+        SCREEN.fill((255, 255, 255, 50))
+        pygame.display.flip()
+
+        self.music.playbg()
+
+    def death(self):
+        """Animate the screen fading to black for entering a new area"""
+        # Get screen options, fill with black
+        clock = pygame.time.Clock()
+        blackrect = pygame.Surface(self.screen.get_size())
+        blackrect.set_alpha(100)
+        blackrect.fill((255, 0, 0))
 
         # Start changing color to make an illusion of animation
         for i in range(0, 5):
@@ -50,6 +99,8 @@ class Game(object):
         self.tilemap = tmx.load(map_filename, SCREEN.get_size())
         self.players = tmx.SpriteLayer()
         self.objects = tmx.SpriteLayer()
+        self.collectibles = []
+        self.stones = []
 
         # Initialize potential animated objects
         try:
@@ -60,6 +111,21 @@ class Game(object):
             pass
         else:
             self.tilemap.layers.append(self.objects)
+
+        i = 0
+        for i, cell in self.tilemap.layers['items'].cells.items():
+            if 'collectible' in cell.tile.properties and cell.tile.properties['collectible'] == 2:
+                items = [cell,
+                         self.tilemap.layers['items'].cells[(cell.x + 1, cell.y)],
+                         self.tilemap.layers['items'].cells[(cell.x, cell.y + 1)],
+                         self.tilemap.layers['items'].cells[(cell.x + 1, cell.y + 1)]]
+                self.collectibles.append(Collectible(items, pygame.Rect(cell.px, cell.py, 64, 64), self))
+            elif 'stone' in cell.tile.properties and cell.tile.properties['stone'] == 2:
+                items = [cell,
+                         self.tilemap.layers['items'].cells[(cell.x + 1, cell.y)],
+                         self.tilemap.layers['items'].cells[(cell.x, cell.y + 1)],
+                         self.tilemap.layers['items'].cells[(cell.x + 1, cell.y + 1)]]
+                self.stones.append(Stone(items, pygame.Rect(cell.px, cell.py, 64, 64), self))
 
         # Initialize player sprite
         # Get player's start position, the first one from (0,0)
@@ -74,11 +140,12 @@ class Game(object):
 
         # Start loading level from tmx file
         clock = pygame.time.Clock()
+        self.fadeout()
         self.startlevel(self.counter.get_current_level() + '.tmx')
 
         # Game loop
         while True:
-            timepassed = clock.tick(70)
+            timepassed = clock.tick(60)
 
             # Await event from user to close level
             for event in pygame.event.get():
@@ -90,6 +157,10 @@ class Game(object):
             # Update map status
             self.tilemap.update(timepassed, self)
             SCREEN.fill((0, 0, 0))
+            for item in self.collectibles:
+                item.update()
+            for item in self.stones:
+                item.update()
             self.tilemap.draw(self.screen)
             pygame.display.flip()
 
@@ -100,6 +171,8 @@ if __name__ == '__main__':
     SCREEN = pygame.display.set_mode((1024, 768), 0, 32)
     pygame.display.set_caption("PyDash")
     pygame.display.set_icon(pygame.image.load('sprites/icon.png'))
+    pygame.mixer.pre_init(44100, -16, 2, 2048)
+    pygame.mixer.init()
 
     # Prepare menu for being shown
     MENU_ITEMS = ('Start', 'Options', 'Quit')
