@@ -1,3 +1,7 @@
+"""
+Module implementing sounds in game, also music during stages
+"""
+
 __author__ = 'Kedam'
 import pygame
 import os
@@ -5,7 +9,7 @@ import src.Options
 
 
 class SoundPlayer(object):
-
+    """Class implementing sound handling"""
     def __init__(self):
         self.eat = pygame.mixer.Sound(os.path.join('sounds', 'select.wav'))
         self.death = pygame.mixer.Sound(os.path.join('sounds', 'death.wav'))
@@ -13,24 +17,29 @@ class SoundPlayer(object):
         self.gamebackgroundmusic = pygame.mixer.music.load(os.path.join('sounds', 'game_bg.mp3'))
 
     def eatsound(self):
-        self.eat.set_volume(src.Options.config.soundvolume)
-        if src.Options.config.soundon:
+        """Plays eat sound file"""
+        self.eat.set_volume(src.Options.CONFIG.soundvolume)
+        if src.Options.CONFIG.soundon:
             self.eat.play()
 
     def deathsound(self):
-        self.death.set_volume(src.Options.config.soundvolume)
-        if src.Options.config.soundon:
+        """Plays death sound file"""
+        self.death.set_volume(src.Options.CONFIG.soundvolume)
+        if src.Options.CONFIG.soundon:
             self.death.play()
 
     def startsound(self):
-        self.start.set_volume(src.Options.config.soundvolume)
-        if src.Options.config.soundon:
+        """Plays start sound file"""
+        self.start.set_volume(src.Options.CONFIG.soundvolume)
+        if src.Options.CONFIG.soundon:
             self.start.play()
 
     def playbg(self):
-        if src.Options.config.musicon:
+        """Plays background music"""
+        if src.Options.CONFIG.musicon:
             pygame.mixer.music.play()
-            pygame.mixer.music.set_volume(src.Options.config.musicvolume)
+            pygame.mixer.music.set_volume(src.Options.CONFIG.musicvolume)
 
     def stopbg(self):
+        """Stops background music while fading out"""
         pygame.mixer.music.fadeout(800)

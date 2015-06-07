@@ -6,13 +6,21 @@ also it is responsible for loading maps and visual effects such as fadeout.
 import sys
 import pygame
 import src.Options
-from src.lib import tmx
-from src.Player import Player
-from src.LevelCounter import LevelCounter
-from src.GameMenu import GameMenu
-from src.Collectible import Collectible
-from src.Stone import Stone
-from src.Sounds import SoundPlayer
+from src import tmx
+from src import Player
+from src import LevelCounter
+from src import GameMenu
+from src import Collectible
+from src import Stone
+from src import SoundPlayer
+
+# pylint: disable=no-member
+# pygame has these members, just pycharm doesnt see them
+# pylint: disable=too-many-function-args
+# pylint thinks that a single pygame.Rect object is too large for constructor
+# pylint: disable=unused-variable
+# pylint thinks that iterator in for loop is useless, it is not
+
 
 class Game(object):
     """Game class, it runs whole game"""
@@ -56,7 +64,6 @@ class Game(object):
 
         pygame.time.wait(1000)
 
-
         blackrect = pygame.Surface(self.screen.get_size())
         blackrect.set_alpha(50)
         blackrect.fill((0, 0, 0))
@@ -75,18 +82,18 @@ class Game(object):
         self.music.playbg()
 
     def death(self):
-        """Animate the screen fading to black for entering a new area"""
+        """Animate screen after death"""
         # Get screen options, fill with black
         clock = pygame.time.Clock()
-        blackrect = pygame.Surface(self.screen.get_size())
-        blackrect.set_alpha(100)
-        blackrect.fill((255, 0, 0))
+        redrect = pygame.Surface(self.screen.get_size())
+        redrect.set_alpha(100)
+        redrect.fill((255, 0, 0))
 
         # Start changing color to make an illusion of animation
         for i in range(0, 5):
             clock.tick(20)
             print i
-            self.screen.blit(blackrect, (0, 0))
+            self.screen.blit(redrect, (0, 0))
             pygame.display.flip()
 
         # Then release color
@@ -103,24 +110,17 @@ class Game(object):
         self.collectibles = []
         self.stones = []
 
-        # Initialize potential animated objects
-        try:
-            for cell in self.tilemap.layers['sprites'].find('src'):
-                SpriteLoop((cell.px, cell.py), cell, self.objects)
-        # Turns out were missing sprites layer
-        except KeyError:
-            pass
-        else:
-            self.tilemap.layers.append(self.objects)
 
-        i = 0
+
         for i, cell in self.tilemap.layers['items'].cells.items():
             if 'collectible' in cell.tile.properties and cell.tile.properties['collectible'] == 2:
                 items = [cell,
                          self.tilemap.layers['items'].cells[(cell.x + 1, cell.y)],
                          self.tilemap.layers['items'].cells[(cell.x, cell.y + 1)],
                          self.tilemap.layers['items'].cells[(cell.x + 1, cell.y + 1)]]
-                self.collectibles.append(Collectible(items, pygame.Rect(cell.px, cell.py, 64, 64), self))
+                self.collectibles.append(
+                    Collectible(items, pygame.Rect(cell.px, cell.py, 64, 64), self)
+                    )
             elif 'stone' in cell.tile.properties and cell.tile.properties['stone'] == 2:
                 items = [cell,
                          self.tilemap.layers['items'].cells[(cell.x + 1, cell.y)],
@@ -170,21 +170,17 @@ class Game(object):
 if __name__ == '__main__':
     # Prepare screen of game to be shown, set resolution, name and icon
     pygame.init()
-    resolution = [(640, 480), (800,600), (1024, 768)]
-    SCREEN = pygame.display.set_mode(resolution[src.Options.config.resolution], 0, 32)
+    SCREEN = pygame.display.set_mode(
+        [(640, 480), (800, 600), (1024, 768)][src.Options.CONFIG.resolution],
+        0,
+        32)
     pygame.display.set_caption("PyDash")
     pygame.display.set_icon(pygame.image.load('sprites/icon.png'))
     pygame.mixer.pre_init(44100, -16, 2, 2048)
     pygame.mixer.init()
 
-
-
-
-    # Prepare menu for being shown
-
-    FUNCTIONS = {'Start': Game(SCREEN, LevelCounter()).main, 'Options': src.Options.main, 'Quit': sys.exit}
-    GAME = GameMenu(SCREEN, FUNCTIONS.keys(), FUNCTIONS)
-
-    # Run game, will do some backgrounds later
-
-    GAME.run()
+    # Prepare menu for being shown and run it
+    GameMenu(SCREEN,
+             {'Start': Game(SCREEN, LevelCounter()).main,
+              'Options': src.Options.main,
+              'Quit': sys.exit}).run()

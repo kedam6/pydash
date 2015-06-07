@@ -15,8 +15,6 @@ __author__ = 'Kedam'
 import pygame
 
 
-MOV_SPEED = 16
-
 class Player(pygame.sprite.Sprite):
     """Player class"""
 
@@ -32,7 +30,7 @@ class Player(pygame.sprite.Sprite):
         self.step = 'rightFoot'
         self.score = 0
         self.locked = False
-
+        self.movementspeed = 16
         # Set default orientation as facing down
         self.set_sprite()
 
@@ -131,14 +129,14 @@ class Player(pygame.sprite.Sprite):
         # Move rect with mov speed
             if self.walking and self.delta_x < 64:
                 if self.orient == 'up':
-                    self.rect.y -= MOV_SPEED
+                    self.rect.y -= self.movementspeed
                 elif self.orient == 'down':
-                    self.rect.y += MOV_SPEED
+                    self.rect.y += self.movementspeed
                 elif self.orient == 'left':
-                    self.rect.x -= MOV_SPEED
+                    self.rect.x -= self.movementspeed
                 elif self.orient == 'right':
-                    self.rect.x += MOV_SPEED
-                self.delta_x += MOV_SPEED
+                    self.rect.x += self.movementspeed
+                self.delta_x += self.movementspeed
 
         # Detect collision after
         self.detect_collision(last_rect, game)

@@ -29,7 +29,7 @@ class GameMenu(object):
     """GameMenu class, has list of MenuItems,
     is responsible for their behaviour and mouse/keyboard support"""
 
-    def __init__(self, screen, items, funcs, bg_color=BLACK, font=None, font_size=30,
+    def __init__(self, screen, items, bg_color=BLACK, font=None, font_size=30,
                  font_color=GREEN):
         # Set screen and its parameters
         self.screen = screen
@@ -41,15 +41,15 @@ class GameMenu(object):
         self.clock = pygame.time.Clock()
 
         # Menu items and functions associated with them
-        self.funcs = funcs
+        self.funcs = items
         self.items = []
 
         # Prepare new MenuItem based on items from
-        for index, item in enumerate(items):
+        for index, item in enumerate(items.keys()):
             menu_item = MenuItem(item, font, font_size, font_color)
 
             # Get total height of all items
-            total_item_height = len(items) * menu_item.height
+            total_item_height = len(items.keys()) * menu_item.height
 
             # Place items on center of screen
             position_x = (self.scr_width / 2) - (menu_item.width / 2)
