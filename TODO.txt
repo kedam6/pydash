@@ -1,3 +1,0 @@
-refactor
-documentation
-options
