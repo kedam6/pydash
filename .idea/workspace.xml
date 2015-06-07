@@ -27,8 +27,8 @@
       <file leaf-file-name="Game.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.275862" vertical-offset="2726" max-vertical-offset="3213">
-              <caret line="183" column="0" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+            <state vertical-scroll-proportion="3.137931" vertical-offset="2097" max-vertical-offset="3349">
+              <caret line="118" column="82" selection-start-line="118" selection-start-column="82" selection-end-line="118" selection-end-column="82" />
               <folding>
                 <element signature="e#124#134#0" expanded="true" />
               </folding>
@@ -51,8 +51,8 @@
       <file leaf-file-name="Stone.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Stone.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.650924" vertical-offset="1774" max-vertical-offset="3400">
-              <caret line="123" column="40" selection-start-line="123" selection-start-column="40" selection-end-line="123" selection-end-column="40" />
+            <state vertical-scroll-proportion="-1.5010267" vertical-offset="2142" max-vertical-offset="3553">
+              <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
               <folding>
                 <element signature="e#21#34#0" expanded="true" />
               </folding>
@@ -103,8 +103,8 @@
       <file leaf-file-name="Player.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Player.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2442" max-vertical-offset="2958">
-              <caret line="168" column="32" selection-start-line="168" selection-start-column="32" selection-end-line="168" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2323" max-vertical-offset="2839">
+              <caret line="161" column="56" selection-start-line="161" selection-start-column="56" selection-end-line="161" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -113,8 +113,8 @@
       <file leaf-file-name="Collectible.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Collectible.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1966" max-vertical-offset="2754">
-              <caret line="130" column="16" selection-start-line="130" selection-start-column="16" selection-end-line="135" selection-end-column="84" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="79" max-vertical-offset="2737">
+              <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
               <folding>
                 <element signature="e#21#34#0" expanded="true" />
               </folding>
@@ -139,9 +139,9 @@
         <option value="$PROJECT_DIR$/src/SpriteLoop.py" />
         <option value="$PROJECT_DIR$/src/GameMenu.py" />
         <option value="$PROJECT_DIR$/src/LevelCounter.py" />
+        <option value="$PROJECT_DIR$/src/Sounds.py" />
         <option value="$PROJECT_DIR$/Game.py" />
         <option value="$PROJECT_DIR$/src/Player.py" />
-        <option value="$PROJECT_DIR$/src/Sounds.py" />
         <option value="$PROJECT_DIR$/src/Collectible.py" />
         <option value="$PROJECT_DIR$/src/Stone.py" />
       </list>
@@ -483,7 +483,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1536" height="826" extended-state="1" />
+    <frame x="0" y="0" width="1536" height="826" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -836,24 +836,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.275862" vertical-offset="2726" max-vertical-offset="3213">
-          <caret line="183" column="0" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
-          <folding>
-            <element signature="e#124#134#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Player.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2442" max-vertical-offset="2958">
-          <caret line="168" column="32" selection-start-line="168" selection-start-column="32" selection-end-line="168" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LevelCounter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
@@ -880,10 +862,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.137931" vertical-offset="2097" max-vertical-offset="3349">
+          <caret line="118" column="82" selection-start-line="118" selection-start-column="82" selection-end-line="118" selection-end-column="82" />
+          <folding>
+            <element signature="e#124#134#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2323" max-vertical-offset="2839">
+          <caret line="161" column="56" selection-start-line="161" selection-start-column="56" selection-end-line="161" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Collectible.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1966" max-vertical-offset="2754">
-          <caret line="130" column="16" selection-start-line="130" selection-start-column="16" selection-end-line="135" selection-end-column="84" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="79" max-vertical-offset="2737">
+          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
           <folding>
             <element signature="e#21#34#0" expanded="true" />
           </folding>
@@ -892,8 +892,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Stone.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.650924" vertical-offset="1774" max-vertical-offset="3400">
-          <caret line="123" column="40" selection-start-line="123" selection-start-column="40" selection-end-line="123" selection-end-column="40" />
+        <state vertical-scroll-proportion="-1.5010267" vertical-offset="2142" max-vertical-offset="3553">
+          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
           <folding>
             <element signature="e#21#34#0" expanded="true" />
           </folding>

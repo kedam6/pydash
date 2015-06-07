@@ -31,17 +31,28 @@ class Stone(pygame.sprite.Sprite):
             item.y = item.py / 8
         self.rect = self.rect.move(direction[0], direction[1])
 
-
     def update(self):
         if self.gone:
             pass
         if self.timer > 0:
-            if self.timer < 16:
+            print self.timer
+            print self.direction
+            if self.timer < 4:
                 if self.direction == 'lu':
                     self.moveleft()
+                    return
                 elif self.direction == 'ru':
                     self.moveright()
+                    return
+                else:
+
+                    self.timer = 0
+                    self.direction = ''
+                    self.moving = False
+                    self.game.player.locked = False
+                    return
             else:
+
                 self.timer = 0
                 self.direction = ''
                 self.moving = False
@@ -86,7 +97,7 @@ class Stone(pygame.sprite.Sprite):
             return
 
         newrect = self.rect.copy()
-        newrect = newrect.move(0, 8)
+        newrect = newrect.move(0, 4)
 
         # Eaten
 
@@ -118,12 +129,12 @@ class Stone(pygame.sprite.Sprite):
         #Check gravity
         if self.checkitem(newrect) == "Empty":
             self.moving = True
-            self.move((0, 8))
+            self.move((0, 4))
+            self.direction = 'd'
         else:
-            if self.moving == True and newrect.colliderect(self.game.player.rect) and self.game.player.orient != "up":
+            if self.moving == True and newrect.colliderect(self.game.player.rect) and self.direction == 'd':
                 self.game.music.stopbg()
                 self.game.music.deathsound()
-                self.game.player.die(self.game)
                 self.game.death()
                 self.game.fadeout()
                 self.game.startlevel(self.game.counter.get_current_level() + '.tmx')
@@ -132,8 +143,7 @@ class Stone(pygame.sprite.Sprite):
         rect = self.game.player.rect.copy()
         rect.x = rect.x + 1
         rect.width = 62
-        if self.rect.colliderect(rect):
-            print 'here', self.rect, self.game.player.rect
+        if self.rect.colliderect(rect) and self.rect.y == rect.y:
             if self.game.player.orient == "left":
                 self.game.player.rect.x += src.Player.MOV_SPEED
                 self.moveleft()
@@ -180,10 +190,9 @@ class Stone(pygame.sprite.Sprite):
                 self.game.player.locked = True
 
     def moveright(self):
-        if self.timer > 0 and self.checkitem(self.rect.copy().move(0,64)) != "Empty":
+        if self.timer > 0:
             self.timer += 1
-            if self.checkitem(self.rect.copy().move(-4, 0)) == "Empty":
-                self.move((4, 0))
+            self.move((4, 0))
             self.game.player.rect.x += 4
         else:
             rect = self.rect.copy().move(4, 0)

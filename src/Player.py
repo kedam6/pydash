@@ -160,10 +160,3 @@ class Player(pygame.sprite.Sprite):
 
         # Refocus the camera
         game.tilemap.set_focus(self.rect.x, self.rect.y)
-
-    def die(self, game):
-        self.image = pygame.image.load('sprites/explosion.png').convert()
-        for i in range(0, 16):
-            self.image.scroll(-64, 0)
-            game.screen.blit(self.image, self.rect)
-            pygame.time.wait(50)

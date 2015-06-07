@@ -45,7 +45,7 @@ class Game(object):
             self.screen.blit(blackrect, (0, 0))
             pygame.display.flip()
 
-        myfont = pygame.font.SysFont("Arial", 50)
+        myfont = pygame.font.SysFont("Arial", 80)
         label = myfont.render("Level " + str(self.counter.count), 1, (255, 255, 0))
         textpos = label.get_rect()
         textpos.centerx = blackrect.get_rect().centerx
@@ -152,6 +152,7 @@ class Game(object):
                 if event.type == pygame.QUIT:
                     sys.exit(0)
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    self.music.stopbg()
                     return
 
             # Update map status
@@ -174,10 +175,17 @@ if __name__ == '__main__':
     pygame.mixer.pre_init(44100, -16, 2, 2048)
     pygame.mixer.init()
 
+    FUNCTIONS = {'Start': Game(SCREEN, LevelCounter()).main, 'Options': None, 'Quit': sys.exit}
+    GAME = GameMenu(SCREEN, FUNCTIONS.keys(), FUNCTIONS)
+    OPTIONS = {'Resolution': sys.exit, 'Sounds': sys.exit, 'Music': sys.exit, 'Back': GAME.run}
+    OPTIONSMENU = GameMenu(SCREEN, OPTIONS.keys(), OPTIONS)
+
+    FUNCTIONS['Options'] = OPTIONSMENU.run
+
     # Prepare menu for being shown
-    MENU_ITEMS = ('Start', 'Options', 'Quit')
-    FUNCTIONS = {'Start': Game(SCREEN, LevelCounter()).main, 'Options': sys.exit, 'Quit': sys.exit}
+
+
 
     # Run game, will do some backgrounds later
-    GAME = GameMenu(SCREEN, FUNCTIONS.keys(), FUNCTIONS)
+
     GAME.run()

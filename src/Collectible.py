@@ -130,7 +130,6 @@ class Collectible(pygame.sprite.Sprite):
             if self.moving == True and newrect.colliderect(self.game.player.rect) and self.game.player.orient != "up":
                 self.game.music.stopbg()
                 self.game.music.deathsound()
-                self.game.player.die(self.game)
                 self.game.death()
                 self.game.fadeout()
                 self.game.startlevel(self.game.counter.get_current_level() + '.tmx')
