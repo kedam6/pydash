@@ -92,11 +92,12 @@ class Player(pygame.sprite.Sprite):
 
         # We reached entry tile, create screen fadeout, then load next level
         elif len(game.tilemap.layers['triggers'].collide(self.rect, 'entry')) > 0:
-            game.counter.next_level()
-            game.music.stopbg()
-            game.fadeout()
-            game.startlevel(game.counter.get_current_level() + '.tmx')
-            return
+            if len(game.collectibles) == 0:
+                game.counter.next_level()
+                game.music.stopbg()
+                game.fadeout()
+                game.startlevel(game.counter.get_current_level() + '.tmx')
+                return
 
         # We are on edible floor, destroy every cell that we encounter from layer
         elif len(game.tilemap.layers['edible floor'].collide(self.rect, 'noteaten')) > 0:

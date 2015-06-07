@@ -5,6 +5,7 @@ also it is responsible for loading maps and visual effects such as fadeout.
 
 import sys
 import pygame
+import src.Options
 from src.lib import tmx
 from src.Player import Player
 from src.LevelCounter import LevelCounter
@@ -175,16 +176,13 @@ if __name__ == '__main__':
     pygame.mixer.pre_init(44100, -16, 2, 2048)
     pygame.mixer.init()
 
-    FUNCTIONS = {'Start': Game(SCREEN, LevelCounter()).main, 'Options': None, 'Quit': sys.exit}
-    GAME = GameMenu(SCREEN, FUNCTIONS.keys(), FUNCTIONS)
-    OPTIONS = {'Resolution': sys.exit, 'Sounds': sys.exit, 'Music': sys.exit, 'Back': GAME.run}
-    OPTIONSMENU = GameMenu(SCREEN, OPTIONS.keys(), OPTIONS)
 
-    FUNCTIONS['Options'] = OPTIONSMENU.run
+
 
     # Prepare menu for being shown
 
-
+    FUNCTIONS = {'Start': Game(SCREEN, LevelCounter()).main, 'Options': src.Options.main, 'Quit': sys.exit}
+    GAME = GameMenu(SCREEN, FUNCTIONS.keys(), FUNCTIONS)
 
     # Run game, will do some backgrounds later
 
