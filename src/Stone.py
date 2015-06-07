@@ -37,7 +37,7 @@ class Stone(pygame.sprite.Sprite):
         if self.timer > 0:
             print self.timer
             print self.direction
-            if self.timer < 4:
+            if self.timer < 2:
                 if self.direction == 'lu':
                     self.moveleft()
                     return
@@ -132,7 +132,7 @@ class Stone(pygame.sprite.Sprite):
             self.move((0, 4))
             self.direction = 'd'
         else:
-            if self.moving == True and newrect.colliderect(self.game.player.rect) and self.direction == 'd':
+            if self.moving == True and newrect.colliderect(self.game.player.rect) and self.direction == 'd' and self.game.player.orient != "up":
                 self.game.music.stopbg()
                 self.game.music.deathsound()
                 self.game.death()
@@ -180,27 +180,27 @@ class Stone(pygame.sprite.Sprite):
     def moveleft(self):
         if self.timer > 0:
             self.timer += 1
-            self.move((-4, 0))
-            self.game.player.rect.x -= 4
+            self.move((-8, 0))
+            self.game.player.rect.x -= 8
         else:
-            rect = self.rect.copy().move(-4, 0)
+            rect = self.rect.copy().move(-8, 0)
             if self.checkitem(rect) == "Empty" or self.checkitem(rect) == "Player":
                 self.moving = True
-                self.move((-4, 0))
-                self.game.player.rect.x -= 4
+                self.move((-8, 0))
+                self.game.player.rect.x -= 8
                 self.timer = 1
                 self.game.player.locked = True
 
     def moveright(self):
         if self.timer > 0:
             self.timer += 1
-            self.move((4, 0))
-            self.game.player.rect.x += 4
+            self.move((8, 0))
+            self.game.player.rect.x += 8
         else:
-            rect = self.rect.copy().move(4, 0)
+            rect = self.rect.copy().move(8, 0)
             if self.checkitem(rect) == "Empty" or self.checkitem(rect) == "Player":
                 self.moving = True
-                self.move((4, 0))
-                self.game.player.rect.x += 4
+                self.move((8, 0))
+                self.game.player.rect.x += 8
                 self.timer = 1
                 self.game.player.locked = True

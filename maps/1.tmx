@@ -145,7 +145,7 @@
  </layer>
  <layer name="edible floor" width="40" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt07EJACAMBdEMl/1nsrIRBAl+kugFrtDqiepm5iRPPa/71MbXfeqp/k9+8CnnB1/1+42cYd3brfGdvQF8d8+Q7cCHr2L48OHr6yPq1JxsR1cfxRo4uzIQ
+   eJztlEEOACEIA3mc/3/T3k0IWtDV2iY9KApDgjYza3LakbL3vXyj9cTHzVc9v9m5F99bfJHQOlG+W/n6miiX+MSH8FX/LzM9/FF7d29Rr1XxXqx83trLn43fxofOp/jG5jran42z863SK3yr3hkrn3dut9j4TvHpfDLmD6d83Hk=
   </data>
  </layer>
  <layer name="foreground" width="40" height="36">
@@ -155,7 +155,7 @@
  </layer>
  <layer name="items" width="40" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt0EEKwCAQA0D/a9uTtd/vPsCLLILIDOSQHFMKO7gjz2CvkWuir9Ij32BvkXeir+K/HP/l+C/HfwAAAHCuH7i3Iyk=
+   eJztl9sKAyEMRPu/vTz18vsVSl6WPcxYk64UB0LQbMxmiBpPp4UMnJtcdvS1yc3wj+9C03qhyY/i3Zs8dvSzycv4v/guNK0XmvwoHuUxC3+Uxyz8jaKXb/Lr9Xfxbf6Lvw+q+cvev+56R+1fdz03njqnFKr5U+eUwuJvbv4WxkB9BSHL7p6z1FcQsuxu3Sn+aEx9tmvP4o/G1Ge79qx9ezR/CrPwR3nQvHrnZfNHedC8eudV8VelVRyF3nv01/fuNo/RvkbFGa2/0b5Gxem9P9w6qa7PLXr3WXV9Eqren1lY/et/4Q3nuwpY
   </data>
  </layer>
  <layer name="sprites" width="40" height="36" visible="0">
