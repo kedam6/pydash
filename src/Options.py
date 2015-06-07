@@ -3,7 +3,7 @@ __author__ = 'Kedam'
 import Tkinter
 import tkMessageBox
 import ttk
-
+import ConfigParser
 
 class OptionsObject(object):
 
@@ -13,13 +13,35 @@ class OptionsObject(object):
         self.musicvolume = 0.2
         self.soundon = True
         self.soundvolume = 1.0
+        self.parser = ConfigParser.RawConfigParser()
         self.load()
 
     def load(self):
-        pass
+        self.parser = ConfigParser.RawConfigParser()
+        try:
+            with open('config.cfg', 'rb') as configfile:
+                self.parser.read('config.cfg')
+                self.resolution = self.parser.getint('Config', 'res')
+                self.soundon = self.parser.getboolean('Config', 'son')
+                self.soundvolume = self.parser.getfloat('Config', 'sv')
+                self.musicon = self.parser.getboolean('Config', 'mon')
+                self.musicvalue = self.parser.getfloat('Config', 'mv')
+        except Exception as e:
+            self.save()
 
     def save(self):
-        pass
+        self.parser = ConfigParser.RawConfigParser()
+        self.parser.add_section('Config')
+        self.parser.set('Config', 'res', str(self.resolution))
+        self.parser.set('Config', 'son', str(self.soundon))
+        self.parser.set('Config', 'sv', str(self.soundvolume))
+        self.parser.set('Config', 'mon', str(self.musicon))
+        self.parser.set('Config', 'mv', str(self.musicvolume))
+
+
+
+        with open('config.cfg', 'wb') as configfile:
+            self.parser.write(configfile)
 
 
 
@@ -35,7 +57,13 @@ def okCallBack():
     global root
     global resolutionbox
     global soundon, soundvalue, musicon, musicvalue, config
-    config.resolution = resolutionbox.get()
+    config.resolution = resolutionbox['values'].index(resolutionbox.get())
+    config.soundon = soundon.get()
+    config.musicon = musicon.get()
+    config.musicvolume = musicvalue.get() / 100.0
+    config.soundvolume = soundvalue.get() / 100.0
+    config.save()
+
     tkMessageBox.showinfo("Saved", "Options saved")
 
 
@@ -50,9 +78,9 @@ def main():
 
     root = Tkinter.Tk()
     resolutiontext = Tkinter.StringVar()
-    soundon = Tkinter.IntVar()
+    soundon = Tkinter.BooleanVar()
     soundon.set(config.soundon)
-    musicon = Tkinter.IntVar()
+    musicon = Tkinter.BooleanVar()
     musicon.set(config.musicon)
     soundvalue = Tkinter.IntVar()
     soundvalue.set(config.soundvolume * 100)

@@ -170,7 +170,8 @@ class Game(object):
 if __name__ == '__main__':
     # Prepare screen of game to be shown, set resolution, name and icon
     pygame.init()
-    SCREEN = pygame.display.set_mode((1024, 768), 0, 32)
+    resolution = [(640, 480), (800,600), (1024, 768)]
+    SCREEN = pygame.display.set_mode(resolution[src.Options.config.resolution], 0, 32)
     pygame.display.set_caption("PyDash")
     pygame.display.set_icon(pygame.image.load('sprites/icon.png'))
     pygame.mixer.pre_init(44100, -16, 2, 2048)
