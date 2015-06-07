@@ -143,15 +143,17 @@ class Stone(pygame.sprite.Sprite):
         rect = self.game.player.rect.copy()
         rect.x = rect.x + 1
         rect.width = 62
-        if self.rect.colliderect(rect) and self.rect.y == rect.y:
+        if self.rect.colliderect(rect):
             if self.game.player.orient == "left":
                 self.game.player.rect.x += src.Player.MOV_SPEED
-                self.moveleft()
-                self.direction = 'lu'
+                if self.rect.y == rect.y:
+                    self.moveleft()
+                    self.direction = 'lu'
             elif self.game.player.orient == "right":
                 self.game.player.rect.x -= src.Player.MOV_SPEED
-                self.moveright()
-                self.direction = 'ru'
+                if self.rect.y == rect.y:
+                    self.moveright()
+                    self.direction = 'ru'
             elif self.game.player.orient == "up":
                 self.game.player.rect.y += src.Player.MOV_SPEED
             elif self.game.player.orient == "down":
